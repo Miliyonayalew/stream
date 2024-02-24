@@ -15,11 +15,10 @@ fl = st.file_uploader(":file_folder: Upload a file",type=(["csv","txt","xlsx","x
 if fl is not None:
     filename = fl.name
     st.write(filename)
-    df = pd.read_csv(filename, encoding = "ISO-8859-1")
+    df = pd.read_csv(fl, encoding = "ISO-8859-1")
 else:
-    os.chdir(r"C:\Users\Dese\Desktop\van")
-    df = pd.read_csv("New_final2.csv", encoding = "ISO-8859-1")
-
+    st.write("Please upload a file.")
+    st.stop()  # Stop the script if no file is uploaded
 
 st.sidebar.header("Choose your filter: ")
 # Create for City/Town
@@ -98,5 +97,3 @@ with cl2:
         csv = region.to_csv(index = False).encode('utf-8')
         st.download_button("Download Data", data = csv, file_name = "Region.csv", mime = "text/csv",
                         help = 'Click here to download the data as a CSV file')
-
-
